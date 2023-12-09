@@ -136,6 +136,12 @@ resource "azurerm_linux_virtual_machine" "this" {
   }
 }
 
+data "template_file" "this" {
+  template = file("data/cloudinit.yml")
+
+
+}
+
 
 data "template_cloudinit_config" "this" {
   gzip          = true
@@ -145,12 +151,4 @@ data "template_cloudinit_config" "this" {
     content_type = "text/cloud-config"
     content      = data.template_file.this.rendered
   }
-}
-
-data "template_file" "this" {
-  template = file("data/cloudinit.yml")
-  vars = {
-    config_json = base64encode(data.template_file.userdata.rendered)
-  }
-
 }
