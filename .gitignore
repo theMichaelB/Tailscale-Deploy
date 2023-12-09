@@ -1,0 +1,6 @@
+.tfstate*
+.terra*
+tf.txt
+pre-reqs/environment.vars
+**/vars/**
+*.vars
