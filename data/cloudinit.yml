@@ -2,14 +2,9 @@ package_update: true
 package_upgrade: true
 packages:
   - git
-  - python3-pip
-  - inn2 
 
 runcmd:
-  - mkdir -p /data/dev/
-  - git clone https://github.com/theMichaelB/Certificates.git --depth 1 /data/dev/
-  - git clone --depth 1 https://github.com/acmesh-official/acme.sh.git /data/dev/acme.sh
-  - chown -R debian:debian /data/dev/
+  - curl -fsSL https://tailscale.com/install.sh | sh
   - init 6 # reboot
 
 write_files:

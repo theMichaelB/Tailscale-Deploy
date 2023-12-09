@@ -1,4 +1,5 @@
 
+
 name: 'Terraform-Apply'
 
 on:
@@ -23,6 +24,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
+      TF_VAR_ssh_public_key: ${{ secrets.PUBLIC_SSH_KEY                          }}
 
     steps:
     # Checkout the repository to the GitHub Actions runner

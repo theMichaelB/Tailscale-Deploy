@@ -100,3 +100,49 @@ resource "azurerm_storage_account" "this" {
   account_replication_type = "LRS"
 }
 
+
+
+resource "azurerm_linux_virtual_machine" "this" {
+  name                = var.vm_name
+  computer_name       = var.vm_name
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+  size                = var.vm_size_map[var.vm_tshirt_size]
+  admin_username      = var.vm_username
+  custom_data         = data.template_cloudinit_config.this.rendered
+  priority            = "Spot"
+  eviction_policy     = "Deallocate"
+
+  network_interface_ids = [
+    azurerm_network_interface.this.id,
+  ]
+  admin_ssh_key {
+    username   = var.vm_username
+    public_key = var.ssh_public_key
+  }
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+  source_image_reference {
+    publisher = "debian"
+    offer     = "debian-12"
+    sku       = "12-gen2"
+    version   = "latest"
+  }
+  boot_diagnostics {
+    storage_account_uri = azurerm_storage_account.this.primary_blob_endpoint
+
+  }
+}
+
+
+data "template_cloudinit_config" "this" {
+  gzip          = true
+  base64_encode = true
+
+  part {
+    content_type = "text/cloud-config"
+    content      = data.template_file.this.rendered
+  }
+}
