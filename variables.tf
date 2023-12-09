@@ -25,12 +25,6 @@ variable "vm_size_map" {
   }
 }
 
-variable "vm_name" {
-  description = "Name of the VM"
-  type        = string
-  default     = "nntp-vm"
-}
-
 variable "vm_username" {
   description = "Username for the VM"
   type        = string
