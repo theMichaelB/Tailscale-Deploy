@@ -146,3 +146,11 @@ data "template_cloudinit_config" "this" {
     content      = data.template_file.this.rendered
   }
 }
+
+data "template_file" "this" {
+  template = file("data/cloudinit.yml")
+  vars = {
+    config_json = base64encode(data.template_file.userdata.rendered)
+  }
+
+}
