@@ -6,10 +6,3 @@ packages:
 runcmd:
   - curl -fsSL https://tailscale.com/install.sh | sh
   - init 6 # reboot
-
-write_files:
-  - encoding: b64
-    content: ${config_json}
-    owner: debian:debian
-    path: /data/dev/config.json
-    permissions: '0644'
