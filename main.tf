@@ -10,7 +10,7 @@ resource "azurerm_virtual_network" "this" {
 }
 
 resource "azurerm_subnet" "this" {
-  name                 = "${var.deployment_prefix}-subnet"
+  name                 = "subnet"
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = ["192.168.11.0/25"]
@@ -18,7 +18,7 @@ resource "azurerm_subnet" "this" {
 
 
 resource "azurerm_subnet" "this2" {
-  name                 = "${var.deployment_prefix}-subnet2"
+  name                 = "subnet2"
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = ["192.168.11.128/25"]
@@ -93,7 +93,7 @@ resource "random_id" "this" {
 # diagnostics storage account
 
 resource "azurerm_storage_account" "this" {
-  name                     = substr(lower("${var.deployment_prefix}${random_id.this.hex}"), 0, 23)
+  name                     = replace(substr(lower("${var.deployment_prefix}${random_id.this.hex}"), 0, 23), "-", "")
   resource_group_name      = data.azurerm_resource_group.this.name
   location                 = data.azurerm_resource_group.this.location
   account_tier             = "Standard"
