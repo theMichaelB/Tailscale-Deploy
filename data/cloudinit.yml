@@ -14,3 +14,25 @@ write_files:
     owner: debian:debian
     path: /data/dev/config.json
     permissions: '0644'
+
+  - encoding: b64
+    content: ${initsh}
+    owner: debian:debian
+    path: /data/dev/init.sh
+    permissions: '0644'
+
+    # data/authorise_routes.py
+  - encoding: b64
+    content: ${authorise_routes_py}
+    owner: debian:debian
+    path: /data/dev/authorise_routes.py
+    permissions: '0644'
+
+    # data/get-tailscale-key.py
+  - encoding: b64
+    content: ${get_tailscale_key_py}
+    owner: debian:debian
+    path: /data/dev/get-tailscale-key.py
+    permissions: '0644'
+
+    # data/cloudinit.yml

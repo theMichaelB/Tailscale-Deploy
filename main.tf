@@ -165,6 +165,9 @@ data "template_file" "this" {
   template = file("data/cloudinit.yml")
   vars = {
     config_json = base64encode(data.template_file.userdata.rendered)
+    get_tailscale_key_py = base64encode(data.template_file.get_tailscale_key_py.rendered)
+    init_sh = base64encode(data.template_file.init_sh.rendered)
+    authorise_routes_py = base64encode(data.template_file.authorise_routes_py.rendered)
   }
 
 }
@@ -185,4 +188,20 @@ data "template_file" "userdata" {
     TAILSCALE_CLIENT_ID = var.TAILSCALE_CLIENT_ID
     TAILSCALE_CLIENT_SECRET = var.TAILSCALE_CLIENT_SECRET
   }
+}
+
+# data/get-tailscale-key.py
+data "template_file" "get_tailscale_key_py" {
+  template = file("data/get-tailscale-key.py")
+}
+
+# data/init.sh
+data "template_file" "init_sh" {
+  template = file("data/init.sh")
+}
+
+# data/authorise_routes.py
+
+data "template_file" "authorise_routes_py" {
+  template = file("data/authorise_routes.py")
 }
