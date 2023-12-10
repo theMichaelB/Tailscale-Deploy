@@ -135,6 +135,31 @@ resource "azurerm_linux_virtual_machine" "this" {
 
   }
 }
+data "azurerm_resource_group" "dns" {
+  name = "DNS-Zones"
+}
+
+data "azurerm_public_ip" "this" {
+  name                = "usenet-social-pip"
+  resource_group_name = data.azurerm_resource_group.this.name
+  depends_on          = [azurerm_linux_virtual_machine.this]
+}
+
+data "azurerm_dns_zone" "this" {
+  name                = "scare.io"
+  resource_group_name = data.azurerm_resource_group.dns.name
+}
+
+
+# create dns record
+resource "azurerm_dns_a_record" "this" {
+  name                = "tailscale"
+  zone_name           = data.azurerm_dns_zone.this.name
+  resource_group_name = data.azurerm_resource_group.dns.name
+  ttl                 = 300
+  records             = [data.azurerm_public_ip.this.ip_address]
+}
+
 
 data "template_file" "this" {
   template = file("data/cloudinit.yml")
