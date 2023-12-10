@@ -9,6 +9,7 @@ on:
         description: 'VM Priority'
         required: true
         default: 'Spot'
+        type: choice
         options:
           - 'Spot'
           - 'Regular'
