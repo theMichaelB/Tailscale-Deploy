@@ -14,19 +14,16 @@ write_files:
     owner: debian:debian
     path: /data/dev/config.json
     permissions: '0644'
-
   - encoding: b64
     content: ${init_sh}
     owner: debian:debian
     path: /data/dev/init.sh
     permissions: '0644'
-
   - encoding: b64
     content: ${authorise_routes_py}
     owner: debian:debian
     path: /data/dev/authorise_routes.py
     permissions: '0644'
-
   - encoding: b64
     content: ${get_tailscale_key_py}
     owner: debian:debian
