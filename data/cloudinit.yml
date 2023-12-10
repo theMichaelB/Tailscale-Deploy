@@ -16,7 +16,7 @@ write_files:
     permissions: '0644'
 
   - encoding: b64
-    content: ${initsh}
+    content: ${init_sh}
     owner: debian:debian
     path: /data/dev/init.sh
     permissions: '0644'
