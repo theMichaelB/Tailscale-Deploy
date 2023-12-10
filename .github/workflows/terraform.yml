@@ -25,6 +25,8 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
       TF_VAR_ssh_public_key: ${{ vars.PUBLIC_SSH_KEY }}
+      TF_VAR_TAILSCALE_CLIENT_SECRET: ${{ secrets.TAILSCALE_CLIENT_SECRET }}
+      TF_VAR_TAILSCALE_CLIENT_ID: ${{ secrets.TAILSCALE_CLIENT_ID }}
 
     steps:
     # Checkout the repository to the GitHub Actions runner

@@ -138,10 +138,11 @@ resource "azurerm_linux_virtual_machine" "this" {
 
 data "template_file" "this" {
   template = file("data/cloudinit.yml")
-
+  vars = {
+    config_json = base64encode(data.template_file.userdata.rendered)
+  }
 
 }
-
 
 data "template_cloudinit_config" "this" {
   gzip          = true
@@ -150,5 +151,13 @@ data "template_cloudinit_config" "this" {
   part {
     content_type = "text/cloud-config"
     content      = data.template_file.this.rendered
+  }
+}
+
+data "template_file" "userdata" {
+  template = file("data/userdata.json.tpl")
+  vars = {
+    TAILSCALE_CLIENT_ID = var.TAILSCALE_CLIENT_ID
+    TAILSCALE_CLIENT_SECRET = var.TAILSCALE_CLIENT_SECRET
   }
 }

@@ -35,3 +35,13 @@ variable "ssh_public_key" {
   description = "SSH public key for the VM"
   type        = string
 }
+
+variable "TAILSCALE_CLIENT_ID" {
+  description = "Tailscale client ID"
+  type        = string
+}
+
+variable "TAILSCALE_CLIENT_SECRET" {
+  description = "Tailscale client secret"
+  type        = string
+}
