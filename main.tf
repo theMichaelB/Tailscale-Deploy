@@ -127,7 +127,7 @@ resource "azurerm_linux_virtual_machine" "this" {
   source_image_reference {
     publisher = "debian"
     offer     = "debian-12"
-    sku       = "12-gen2"
+    sku       = "12-arm64"
     version   = "latest"
   }
   boot_diagnostics {
