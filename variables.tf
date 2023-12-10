@@ -31,6 +31,14 @@ variable "vm_username" {
   default     = "debian"
 }
 
+# set vm priority to spot or regular 
+variable "vm_priority" {
+  description = "Priority for the VM"
+  type        = string
+  default     = "Spot"
+}
+
+
 variable "ssh_public_key" {
   description = "SSH public key for the VM"
   type        = string

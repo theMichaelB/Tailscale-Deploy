@@ -4,6 +4,14 @@ name: 'Terraform-Apply'
 
 on:
   workflow_dispatch:
+    inputs:
+      vm-priority:
+        description: 'VM Priority'
+        required: true
+        default: 'Spot'
+        options:
+          - 'Spot'
+          - 'Regular'
 
 
 permissions:
@@ -27,6 +35,7 @@ jobs:
       TF_VAR_ssh_public_key: ${{ vars.PUBLIC_SSH_KEY }}
       TF_VAR_TAILSCALE_CLIENT_SECRET: ${{ secrets.TAILSCALE_CLIENT_SECRET }}
       TF_VAR_TAILSCALE_CLIENT_ID: ${{ vars.TAILSCALE_CLIENT_ID }}
+      TF_VAR_vm_priority: ${{ inputs.vm-priority }}
 
     steps:
     # Checkout the repository to the GitHub Actions runner

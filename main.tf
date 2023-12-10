@@ -110,8 +110,8 @@ resource "azurerm_linux_virtual_machine" "this" {
   size                = var.vm_size_map[var.vm_tshirt_size]
   admin_username      = var.vm_username
   custom_data         = data.template_cloudinit_config.this.rendered
-  priority            = "Spot"
-  eviction_policy     = "Deallocate"
+  priority            = var.vm_priority
+  eviction_policy     = var.vm_priority == "Spot" ? "Delete" : null
 
   network_interface_ids = [
     azurerm_network_interface.this.id,
