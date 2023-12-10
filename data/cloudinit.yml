@@ -2,31 +2,30 @@ package_update: true
 package_upgrade: true
 packages:
   - git
+  - jq
 
 runcmd:
-  - mkdir -p /data/dev/
+  - chown -R debian:debian /data
+  - chmod +x /data/dev/init.sh
   - curl -fsSL https://tailscale.com/install.sh | sh
+  - /data/dev/init.sh
   - init 6 # reboot
 
 write_files:
   - encoding: b64
     content: ${init_sh}
-    owner: debian:debian
     path: /data/dev/init.sh
     permissions: '0644'
   - encoding: b64
     content: ${authorise_routes_py}
-    owner: debian:debian
     path: /data/dev/authorise_routes.py
     permissions: '0644'
   - encoding: b64
     content: ${get_tailscale_key_py}
-    owner: debian:debian
     path: /data/dev/get-tailscale-key.py
     permissions: '0644'
   - encoding: b64
     content: ${config_json}
-    owner: debian:debian
     path: /data/dev/config.json
     permissions: '0644'
 

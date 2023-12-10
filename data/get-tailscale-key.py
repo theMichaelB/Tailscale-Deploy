@@ -46,16 +46,17 @@ def get_tailnet_key(url, access_token, reusable, ephemeral, preauthorized, tags)
     return response.json()["key"]
 
 def main():
-    client_id = os.getenv("client_id")
-    client_secret = os.getenv("client_secret")
+    client_id = os.getenv("TAILSCALE_CLIENT_ID")
+    client_secret = os.getenv("TAILSCALE_CLIENT_SECRET")
 
     if client_id and client_secret:
         access_token = get_access_token("https://api.tailscale.com/api/v2/oauth/token", client_id, client_secret)
         tailnet_key = get_tailnet_key("https://api.tailscale.com/api/v2/tailnet/-/keys", access_token, reusable, ephemeral, preauthorized, tags)
 
         # Write tailnet_key to file
-        with open("tailscale-key.env", "w") as file:
+        with open("/data/dev/tailscale-key.env", "w") as file:
             file.write("export tailnet_key=" + tailnet_key)
+
 
     else:
         print("client_id or client_secret environment variables are missing.")

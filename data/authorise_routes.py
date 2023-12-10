@@ -31,8 +31,8 @@ def set_tailnet_devices(url, access_token, json_structure):
 
 def main():
     tailnet_key = os.getenv("tailnet_key")
-    client_id = os.getenv("client_id")
-    client_secret = os.getenv("client_secret")
+    client_id = os.getenv("TAILSCALE_CLIENT_ID")
+    client_secret = os.getenv("TAILSCALE_CLIENT_SECRET")
     hostname = os.getenv("hostname")
 
     if tailnet_key and client_id and client_secret and hostname:

@@ -18,8 +18,8 @@ variable "vm_size_map" {
   description = "Map of t-shirt sizes to Azure VM sizes"
   type        = map(string)
   default = {
-    small  = "Standard_B2ts_v2"
-    medium = "Standard_B2s"
+    small  = "Standard_B1ls"
+    medium = "Standard_B2ts_v2"
     large  = "Standard_B4ms"
     xlarge = "Standard_B8ms"
   }
@@ -43,5 +43,10 @@ variable "TAILSCALE_CLIENT_ID" {
 
 variable "TAILSCALE_CLIENT_SECRET" {
   description = "Tailscale client secret"
+  type        = string
+}
+
+variable "network_cidr_prefix" {
+  description = "First three octets of the network CIDR range"
   type        = string
 }

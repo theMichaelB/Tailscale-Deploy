@@ -4,7 +4,7 @@ data "azurerm_resource_group" "this" {
 
 resource "azurerm_virtual_network" "this" {
   name                = "${var.deployment_prefix}-vnet"
-  address_space       = ["192.168.11.0/24"]
+  address_space       = ["${var.network_cidr_prefix}.0/24"]
   location            = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
 }
@@ -13,7 +13,7 @@ resource "azurerm_subnet" "this" {
   name                 = "subnet"
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
-  address_prefixes     = ["192.168.11.0/25"]
+  address_prefixes     = ["${var.network_cidr_prefix}.0/25"]
 }
 
 
@@ -21,7 +21,7 @@ resource "azurerm_subnet" "this2" {
   name                 = "subnet2"
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
-  address_prefixes     = ["192.168.11.128/25"]
+  address_prefixes     = ["${var.network_cidr_prefix}.128/25"]
 }
 
 
@@ -198,6 +198,9 @@ data "template_file" "get_tailscale_key_py" {
 # data/init.sh
 data "template_file" "init_sh" {
   template = file("data/init.sh")
+  vars = {
+    network_cidr_prefix = var.network_cidr_prefix
+  }
 }
 
 # data/authorise_routes.py
