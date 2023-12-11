@@ -13,8 +13,8 @@ echo $EVENTJSON
 if [[ $EVENTJSON == *"Preempt"* ]]; then
     echo "VM is scheduled for maintenance. Initiating shutdown."
     curl -X POST https://api.pushcut.io/KlEgXKvxHw4z5pZy0-BeJ/notifications/VM%20eviction
-    hostname=${cat /etc/hostname}
-    curl -X POST -d "{\"title\":\"${hostname} Eviction\", \"devices\":[\"iPhone Yellow\"],\"text\":\"VM is evicted\"}" -H "Content-Type: application/json" https://api.pushcut.io/KlEgXKvxHw4z5pZy0-BeJ/notifications/VM%20eviction
+    hostname=$${cat /etc/hostname}
+    curl -X POST -d "{\"title\":\"$${hostname} Eviction\", \"devices\":[\"iPhone Yellow\"],\"text\":\"VM is evicted\"}" -H "Content-Type: application/json" https://api.pushcut.io/KlEgXKvxHw4z5pZy0-BeJ/notifications/VM%20eviction
     touch /tmp/eviction
     sudo tailscale logout 
 

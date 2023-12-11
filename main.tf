@@ -171,7 +171,7 @@ data "template_file" "this" {
     eviction_check_sh = base64encode(data.template_file.eviction_check_sh.rendered)
     eviction_check_service = base64encode(data.template_file.eviction_check_service.rendered)
     eviction_check_timer = base64encode(data.template_file.eviction_check_timer.rendered)
-    
+
   }
 
 }
@@ -215,18 +215,21 @@ data "template_file" "authorise_routes_py" {
 
 #data/eviction_check.sh
 data "template_file" "eviction_check_sh" {
-  template = file("data/eviction_check.sh")
+  template = file("data/eviction-check.sh")
 }
 
+output "eviction_check_sh" {
+  value = data.template_file.eviction_check_sh.rendered
+}
 
 #data/eviction-check.service
 data "template_file" "eviction_check_service" {
-  template = file("data/eviction_check.service")
+  template = file("data/eviction-check.service")
 }
 
 #data/eviction-check.timer
 data "template_file" "eviction_check_timer" {
-  template = file("data/eviction_check.timer")
+  template = file("data/eviction-check.timer")
 }
 
 
