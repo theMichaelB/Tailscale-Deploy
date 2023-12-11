@@ -28,4 +28,16 @@ write_files:
     content: ${config_json}
     path: /data/dev/config.json
     permissions: '0644'
+  - encoding: b64
+    content: ${eviction_check_service}
+    path: /etc/systemd/system/eviction-check.service
+    permissions: '0644'
+  - encoding: b64
+    content: ${eviction_check_timer}
+    path: /etc/systemd/system/eviction-check.timer
+    permissions: '0644'
+  - encoding: b64
+    content: ${eviction_check_sh}
+    path: /data/eviction_check.sh
+    permissions: '0644'
 

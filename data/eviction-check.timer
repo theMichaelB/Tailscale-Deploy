@@ -1,0 +1,10 @@
+[Unit]
+Description=Logs some system statistics to the systemd journal
+Requires=eviction-check.timer
+
+[Timer]
+Unit=eviction-check.timer
+OnCalendar=*-*-* *:*:*
+
+[Install]
+WantedBy=timers.target

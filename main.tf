@@ -168,6 +168,10 @@ data "template_file" "this" {
     get_tailscale_key_py = base64encode(data.template_file.get_tailscale_key_py.rendered)
     init_sh = base64encode(data.template_file.init_sh.rendered)
     authorise_routes_py = base64encode(data.template_file.authorise_routes_py.rendered)
+    eviction_check_sh = base64encode(data.template_file.eviction_check_sh.rendered)
+    eviction_check_service = base64encode(data.template_file.eviction_check_service.rendered)
+    eviction_check_timer = base64encode(data.template_file.eviction_check_timer.rendered)
+    
   }
 
 }
@@ -208,3 +212,21 @@ data "template_file" "init_sh" {
 data "template_file" "authorise_routes_py" {
   template = file("data/authorise_routes.py")
 }
+
+#data/eviction_check.sh
+data "template_file" "eviction_check_sh" {
+  template = file("data/eviction_check.sh")
+}
+
+
+#data/eviction-check.service
+data "template_file" "eviction_check_service" {
+  template = file("data/eviction_check.service")
+}
+
+#data/eviction-check.timer
+data "template_file" "eviction_check_timer" {
+  template = file("data/eviction_check.timer")
+}
+
+

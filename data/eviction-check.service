@@ -1,0 +1,12 @@
+[Unit]
+Description=Eviction Check
+After=network.target
+Wants=eviction-check.timer
+
+[Service]
+Type=oneshot
+User=debian
+ExecStart=/bin/bash /data/eviction_check.sh 
+
+[Install]
+WantedBy=multi-user.target
