@@ -12,6 +12,8 @@ runcmd:
   - mkdir -p /etc/systemd/system/snap.multipass.multipassd.service.d/
   - snap install core
   - snap install multipass 
+  - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+  
 
 mounts:
  - [ /dev/disk/azure/scsi1/lun0-part1, /data, auto, "defaults,noexec" ]
