@@ -13,7 +13,13 @@ on:
         options:
           - 'Spot'
           - 'Regular'
-
+      path:
+        required: true
+        type: choice
+        default: 'tailscale'
+        options:
+          - 'tailscale'
+          - 'devbox'
 
 permissions:
   contents: read
@@ -49,13 +55,19 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init 
-      run: terraform init -chdir=tailscale/
+      run: |
+        cd ${{ inputs.path }}
+        terraform init
 
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -input=false -chdir=tailscale/
+      run: |
+        cd ${{ inputs.path }}
+        terraform plan
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
-      run: terraform apply -auto-approve -chdir=tailscale/
+      run: |
+        cd ${{ inputs.path }}
+        terraform apply
