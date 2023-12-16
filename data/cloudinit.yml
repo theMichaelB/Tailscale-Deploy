@@ -8,8 +8,8 @@ runcmd:
   - chown -R debian:debian /data
   - chmod +x /data/dev/init.sh
   - curl -fsSL https://tailscale.com/install.sh | sh
-  - /data/dev/init.sh
-  - init 6 # reboot
+  - #/data/dev/init.sh
+  - #init 6 # reboot
 
 write_files:
   - encoding: b64

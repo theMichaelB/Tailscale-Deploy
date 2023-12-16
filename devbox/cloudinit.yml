@@ -1,0 +1,19 @@
+package_update: true
+package_upgrade: true
+packages:
+  - git
+  - jq
+  - snapd
+  - rsync
+
+
+runcmd:
+  - mkdir -p /data/
+  - mkdir -p /etc/systemd/system/snap.multipass.multipassd.service.d/
+  - snap install core
+  - snap install multipass 
+
+mounts:
+ - [ /dev/disk/azure/scsi1/lun0-part1, /data, auto, "defaults,noexec" ]
+ - [ /dev/disk/azure/scsi1/lun0-part2, /home, auto, "defaults,noexec" ]
+ - [ /dev/disk/azure/scsi1/lun0-part3, /var/snap/multipass/common/, auto, "defaults,noexec" ]

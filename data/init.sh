@@ -5,6 +5,9 @@ subnet_range_cidr="${network_cidr_prefix}.0/24"
 cd /data/dev/
 export TAILSCALE_CLIENT_ID=$(cat /data/dev/config.json | jq -r .TAILSCALE_CLIENT_ID)
 export TAILSCALE_CLIENT_SECRET=$(cat /data/dev/config.json | jq -r .TAILSCALE_CLIENT_SECRET)
+echo 'net.ipv4.ip_forward = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
+echo 'net.ipv6.conf.all.forwarding = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
+sysctl -p /etc/sysctl.d/99-tailscale.conf
 sudo apt-get update
 sudo apt install python3.11-venv -y
 
