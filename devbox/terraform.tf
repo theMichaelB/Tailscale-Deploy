@@ -6,6 +6,7 @@ terraform {
     storage_account_name = "azuredio"
     container_name       = "terraform"
     key                  = "devbox.tailscale.test.tfstate"
+    use_msi              = true
 
   }
 

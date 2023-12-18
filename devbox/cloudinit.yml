@@ -5,6 +5,7 @@ packages:
   - jq
   - snapd
   - rsync
+  - terraform
 
 
 runcmd:
@@ -16,7 +17,7 @@ runcmd:
 
 
 mounts:
- - [ /dev/disk/azure/scsi1/lun0-part1, /data, auto, "defaults,noexec" ]
+ - [ /dev/disk/azure/scsi1/lun0-part1, /data, auto, "defaults" ]
  - [ /dev/disk/azure/scsi1/lun0-part2, /home, auto, "nosuid,nodev,noatime" ]
 
 write_files:
