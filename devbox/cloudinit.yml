@@ -26,5 +26,5 @@ write_files:
     permissions: '0644'
   - content: |
     deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com bookworm main
-  path: /etc/apt/sources.list.d/hashicorp.list
-  permissions: '0644'
+    path: /etc/apt/sources.list.d/hashicorp.list
+    permissions: '0644'
