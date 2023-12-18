@@ -54,16 +54,15 @@ jobs:
       uses: hashicorp/setup-terraform@v3
 
     - name: Terraform Init 
-      run: |
-        cd ${{ inputs.path }}
-        terraform init
+      run: terraform init
+      working-directory: ${{ inputs.path }}
+
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: |
-        cd ${{ inputs.path }}
-        terraform plan
+      run: terraform plan
+      working-directory: ${{ inputs.path }}
+
       # On push to "main", build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
-      run: |
-        cd ${{ inputs.path }}
-        terraform apply
+      run: terraform apply
+      working-directory: ${{ inputs.path }}
