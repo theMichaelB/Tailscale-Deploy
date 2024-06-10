@@ -34,7 +34,7 @@ resource "azurerm_linux_virtual_machine" "this" {
   computer_name       = "devbox"
   location            = data.terraform_remote_state.devbox.outputs.location
   resource_group_name = data.terraform_remote_state.devbox.outputs.resource_group_name
-  size                = "Standard_D2ds_v4"
+  size                = "Standard_D2d_v4"
   admin_username      = "debian"
   custom_data         = data.template_cloudinit_config.this.rendered
   priority        = var.vm_priority
